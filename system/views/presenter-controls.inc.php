@@ -7,7 +7,7 @@
                value="<?php echo $room_uri; ?>"
                disabled />
     </label>
-    <input type="submit" value="Close This Room" />
+    <input type="submit" value="关闭房间" />
     <input type="hidden" name="room_id"
            value="<?php echo $room_id; ?>" />
     <input type="hidden" name="nonce"

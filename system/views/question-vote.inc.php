@@ -1,7 +1,7 @@
 
 <form method="post" class="vote"
       action="<?php echo $form_action; ?>">
-    <input value="I also have this question."
+    <input value="我依然有问题"
            type="submit" <?php echo $disabled; ?> />
     <input type="hidden" name="question_id"
            value="<?php echo $question_id; ?>" />
