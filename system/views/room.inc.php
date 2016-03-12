@@ -2,7 +2,7 @@
     <header>
         <h2><?php echo $room_name; ?></h2>
         <p>
-            Presented by <?php echo $presenter; ?>
+            房主是:<?php echo $presenter; ?>
             (<a href="mailto:<?php echo $email; ?>">email</a>)
         </p>
         <?php echo $controls; ?>
