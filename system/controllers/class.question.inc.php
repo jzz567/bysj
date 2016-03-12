@@ -21,7 +21,7 @@ class Question extends Controller {
         } else {
             $this->room_id = isset($options[0]) ? (int)$options[0] : 0;
             if ($this->room_id === 0) {
-                throw new Exception("Invalid room ID supplied");
+                throw new Exception("无效的房间ID");
             }
         }
     }
@@ -141,7 +141,7 @@ class Question extends Controller {
 
             $output['markup'] = $view->render(FALSE);
         } else {
-            throw new Exception('Error creating the room.');
+            throw new Exception('房间创建错误');
         }
         setcookie('voted_for_' . $question_id, 1, time() + 2592000, '/');
 

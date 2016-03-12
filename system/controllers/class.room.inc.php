@@ -124,7 +124,7 @@ class Room extends Controller {
         if (is_array($output) && isset($output['room_id'])) {
             $room_id = $output['room_id'];
         } else {
-            throw new Exception('Error creating the room.');
+            throw new Exception('房间创建错误');
         }
         setcookie('presenter_room_' . $room_id, 1, time() + 2592000, '/');
 
