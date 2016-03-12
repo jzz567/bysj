@@ -6,4 +6,4 @@
 
 3.配置文件里面的APP_TIMEZONE是设置时区，根据你的具体情况设置。具体设置值可以查看PHP官方文档。[链接](http://php.net/manual/zh/timezones.php)
 
-
+4.Pusher的appid,key,secret可以在[Pusher官网](https://pusher.com/)注册后的控制面板里获取。
