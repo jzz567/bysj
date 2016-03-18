@@ -12,3 +12,7 @@
 .idea/workspace.xml
 
 system/config/config.inc.php
+
+.idea/jsLibraryMappings.xml
+
+test.html

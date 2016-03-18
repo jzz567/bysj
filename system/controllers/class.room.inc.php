@@ -103,23 +103,18 @@ class Room extends Controller {
 
     protected function join_room() {
         $room_id = $this->sanitize($_POST['room_id']);
-
-
         if ($this->model->room_exists($room_id)) {
             $header = APP_URI . 'room/' . $room_id;
         } else {
             $header = APP_URI . 'no-room';
         }
-
         header("Location: " . $header);
         exit;
     }
 
     protected function create_room() {
-        $presenter = $this->sanitize($_POST['presenter-name']);
-        $email = $this->sanitize($_POST['presenter-email']);
         $name = $this->sanitize($_POST['session-name']);
-        $output = $this->model->create_room($presenter, $email, $name);
+        $output = $this->model->create_room($name);
 
         if (is_array($output) && isset($output['room_id'])) {
             $room_id = $output['room_id'];
@@ -142,6 +137,15 @@ class Room extends Controller {
     }
 
     protected function send_msg() {
+        $pusher = new Pusher(PUSHER_KEY, PUSHER_SECRET, PUSHER_APPID);
+        $data = array(
+            'name' => $_SESSION['user_name'],
+            'msg' => htmlentities(strip_tags($_POST['message']))
+        );
+        $pusher->trigger('presence-room_' . $_POST['room_id'], 'send-message', $data);
+    }
+
+    protected function user_disconnected() {
         $pusher = new Pusher(PUSHER_KEY, PUSHER_SECRET, PUSHER_APPID);
         $data = array(
             'name' => $_SESSION['user_name'],

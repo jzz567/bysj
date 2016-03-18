@@ -162,7 +162,8 @@ class Question extends Controller {
     }
 
     protected function answer_question() {
-        $room_id = $this->sanitize($_POST['room_id']);
+        $room_id     = $this->sanitize($_POST['room_id']);
+        $question_id = $this->sanitize($_POST['question_id']);
         $cookie_id = 'presenter_room_' . $room_id;
         if (isset($_COOKIE[$cookie_id]) && $_COOKIE[$cookie_id] == 1) {
             return $this->model->answer_question($room_id, $question_id);

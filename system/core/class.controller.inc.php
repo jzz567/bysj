@@ -40,7 +40,7 @@ abstract class controller {
                 throw new Exception('表单提交失败');
             }
             $pusher = new Pusher(PUSHER_KEY, PUSHER_SECRET, PUSHER_APPID);
-            $channel = 'room_' . $room_id;
+            $channel = 'presence-room_' . $room_id;
             $pusher->trigger($channel, $action, $output);
             header('Location:' . APP_URI . 'room/' . $room_id);
             exit;

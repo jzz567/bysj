@@ -67,14 +67,15 @@ if (isset($option[0]) && !empty($option[0]) && $option[0] == 'update') {
 //输出视图
 //-----------------------------------------------------------------
 //载入title,css_path
-$title = $controller->get_title();
-$dirty_path = APP_URI . '/assets/styles/main.css';
-$css_path = remove_unwanted_slashes($dirty_path);
-require_once SYS_PATH . '/inc/header.inc.php';
-$channel = !empty($uri_array[0]) ? 'room_' . $uri_array[0] : "default";
-$controller->output_view();
-require_once SYS_PATH . '/inc/footer.inc.php';
-require_once SYS_PATH . '/inc/footer.inc.php';
+$channel = (!empty($uri_array[0]) && is_numeric($uri_array[0])) ? 'presence-room_' . $uri_array[0] : "default";
+if ($class_name != 'PusherAuth') {
+    $title = $controller->get_title();
+    $dirty_path = APP_URI . '/assets/styles/main.css';
+    $css_path = remove_unwanted_slashes($dirty_path);
+    require_once SYS_PATH . '/inc/header.inc.php';
+    $controller->output_view();
+    require_once SYS_PATH . '/inc/footer.inc.php';
+}
 
 //-----------------------------------------------------------------
 //方法定义

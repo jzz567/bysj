@@ -33,6 +33,7 @@ class User extends Controller {
             $_SESSION["vaild_user"] = true;
             $_SESSION["user_id"] = $login_info[0];
             $_SESSION["user_name"] = $login_info[1];
+            $_SESSION["email"] = $login_info[2];
             header("Location:" . APP_URI . 'home/');
             exit;
         } else {
@@ -65,6 +66,6 @@ class User extends Controller {
     }
 
     protected function user_update() {
-        $this->view = new View('udate-form');
+        $this->view = new View('update-form');
     }
 }

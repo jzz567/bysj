@@ -1,34 +1,24 @@
 <?php
 
 class Room_Model extends Model {
-    public function create_room($presenter, $email, $name) {
+    public function __construct() {
+        $this->mysql();
+    }
+
+    public function create_room($name) {
+        $presenter = $_SESSION['user_name'];
+        $email = $_SESSION['email'];
         $sql = 'INSERT INTO rooms (name) VALUES (:name)';
         $stmt = self::$db->prepare($sql);
         $stmt->bindParam(':name', $name, PDO::PARAM_STR, 255);
         $stmt->execute();
         $stmt->closeCursor();
         $room_id = self::$db->lastInsertId();
-        $sql = "INSERT INTO presenters (name, email)
-                VALUES (:name, :email)
-                ON DUPLICATE KEY UPDATE name=:name";
-        $stmt = self::$db->prepare($sql);
-        $stmt->bindParam(':name', $presenter, PDO::PARAM_STR, 255);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR, 255);
-        $stmt->execute();
-        $stmt->closeCursor();
-        $sql = "SELECT id
-                FROM presenters
-                WHERE email=:email";
-        $stmt = self::$db->prepare($sql);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR, 255);
-        $stmt->execute();
-        $pres_id = $stmt->fetch(PDO::FETCH_OBJ)->id;
-        $stmt->closeCursor();
         $sql = 'INSERT INTO room_owners (room_id, presenter_id)
                 VALUES (:room_id, :pres_id)';
         $stmt = self::$db->prepare($sql);
         $stmt->bindParam(":room_id", $room_id, PDO::PARAM_INT);
-        $stmt->bindParam(":pres_id", $pres_id, PDO::PARAM_INT);
+        $stmt->bindParam(":pres_id", $_SESSION["user_id"], PDO::PARAM_INT);
         $stmt->execute();
         $stmt->closeCursor();
 

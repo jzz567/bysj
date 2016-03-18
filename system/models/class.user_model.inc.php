@@ -1,6 +1,10 @@
 <?php
 
 class User_Model extends Model {
+    public function __construct() {
+        $this->mysql();
+    }
+
     public function check_login($username, $password) {
         $sql = "SELECT * FROM presenters WHERE name=:username AND password=:password";
         $stmt = self::$db->prepare($sql);

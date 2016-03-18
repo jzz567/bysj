@@ -1,6 +1,10 @@
 <?php
 
 class Question_Model extends Model {
+    public function __construct() {
+        $this->mysql();
+    }
+
     public function get_room_questions($room_id) {
         $sql = "SELECT
                 id AS question_id,
