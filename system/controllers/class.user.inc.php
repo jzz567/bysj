@@ -12,6 +12,7 @@ class User extends Controller {
             'reg' => 'user_reg',
             'logout' => 'user_logout',
             'update' => 'user_update',
+            'auth' => 'user_auth',
         );
         $this->action = $this->actions[$options[0]];
         $output = $this->{$this->action}();
@@ -67,5 +68,16 @@ class User extends Controller {
 
     protected function user_update() {
         $this->view = new View('update-form');
+    }
+
+    protected function user_auth() {
+        $data = array();
+        if (isset($_POST['username']) && !empty($_POST['username'])) {
+            $data = array("name", $this->sanitize($_POST['username']));
+        }
+        if (isset($_POST['email']) && !empty($_POST['email'])) {
+            $data = array("email", $this->sanitize($_POST['email']));
+        }
+        echo $this->model->user_auth($data);
     }
 }

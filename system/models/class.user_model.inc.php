@@ -35,4 +35,18 @@ class User_Model extends Model {
             return false;
         }
     }
+
+    public function user_auth($data) {
+        $sql = "SELECT * FROM presenters WHERE " . $data[0] . "=:data";
+        $stmt = self::$db->prepare($sql);
+        $stmt->bindParam(':data', $data[1], PDO::PARAM_STR);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        if ($row == null) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
 }

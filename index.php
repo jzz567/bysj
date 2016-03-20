@@ -68,7 +68,10 @@ if (isset($option[0]) && !empty($option[0]) && $option[0] == 'update') {
 //-----------------------------------------------------------------
 //载入title,css_path
 $channel = (!empty($uri_array[0]) && is_numeric($uri_array[0])) ? 'presence-room_' . $uri_array[0] : "default";
-if ($class_name != 'PusherAuth') {
+if (!isset($uri_array[0])) {
+    $uri_array[0] = "";
+}
+if ($class_name != 'PusherAuth' && $uri_array[0] != 'auth') {
     $title = $controller->get_title();
     $dirty_path = APP_URI . '/assets/styles/main.css';
     $css_path = remove_unwanted_slashes($dirty_path);

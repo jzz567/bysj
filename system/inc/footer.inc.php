@@ -15,5 +15,10 @@
     var pusher = new Pusher('cea0285687ebb980bc16', {authEndpoint: "<?php echo APP_URI . 'PusherAuth'?>/auth"});
     var channel = pusher.subscribe("<?php echo $channel;?>");
 </script>
-<script type="text/javascript" src="<?php echo APP_URI; ?>assets/scripts/init.js"></script>
+<script type="text/javascript" src="<?php echo APP_URI; ?>assets/scripts/auth.js"></script>
+<?php
+if ($class_name != 'User') {
+    echo '<script type="text/javascript" src='.APP_URI.'assets/scripts/init.js></script>';
+}
+?>
 </html>

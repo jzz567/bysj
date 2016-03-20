@@ -717,3 +717,16 @@ section#error p {
     }
 }
 
+.tips {
+    padding-left: 20px;
+    height: 50px;
+}
+
+.ok {
+    background: url(../images/reg_ok.gif) no-repeat 0 center;
+}
+
+.error {
+    background: url(../images/reg_error.gif) no-repeat 0 center;
+}
+
