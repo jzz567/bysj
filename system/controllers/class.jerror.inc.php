@@ -1,6 +1,5 @@
 <?php
-
-class Error extends Controller {
+class JError extends Controller {
     public function __construct($options) {
         if (isset($options[1])) {
             $this->_message = $options[1];

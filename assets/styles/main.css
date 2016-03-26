@@ -723,10 +723,10 @@ section#error p {
 }
 
 .ok {
-    background: url(../images/reg_ok.gif) no-repeat 0 center;
+    background: url(https://jzz15.oss-cn-shenzhen.aliyuncs.com/bysj%2Fassets%2Fimages%2Freg_ok.gif) no-repeat 0 center;
 }
 
 .error {
-    background: url(../images/reg_error.gif) no-repeat 0 center;
+    background: url(https://jzz15.oss-cn-shenzhen.aliyuncs.com/bysj%2Fassets%2Fimages%2Freg_error.gif) no-repeat 0 center;
 }
 

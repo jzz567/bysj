@@ -48,7 +48,7 @@ try {
     $controller = new $class_name($option);
 } catch (Exception $e) {
     $option[1] = $e->getMessage();
-    $controller = new Error($option);
+    $controller = new JError($option);
 }
 //-----------------------------------------------------------------
 //l拦截非法请求
@@ -56,12 +56,12 @@ try {
 //过滤控制器请求
 if (!isset($_SESSION['vaild_user']) && empty($_SESSION['vaild_user']) && $class_name != 'Index' && $class_name != 'User') {
     $option[1] = "请登录";
-    $controller = new Error($option);
+    $controller = new JError($option);
 }
 //过滤action
 if (isset($option[0]) && !empty($option[0]) && $option[0] == 'update') {
     $option[1] = "请登录";
-    $controller = new Error($option);
+    $controller = new JError($option);
 }
 //-----------------------------------------------------------------
 //输出视图
@@ -118,6 +118,10 @@ function remove_unwanted_slashes($dirty_path) {
  * 自动在可能的目录搜索类名并载入
  * */
 function class_autoloader($class_name) {
+    if ($class_name == "Jzz\Error") {
+        require_once(SYS_PATH . "/controllers/class.jerror.inc.php");
+        return true;
+    }
     $fname = strtolower($class_name);
     $possible_locations = array(
         SYS_PATH . "/models/class.$fname.inc.php",

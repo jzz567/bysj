@@ -8,12 +8,16 @@ class User extends Controller {
         $this->model = new User_Model;
         $this->actions = array(
             'login' => 'user_login',
+            'weibo_login' => 'weibo_login',
             'regform' => 'user_regform',
             'reg' => 'user_reg',
             'logout' => 'user_logout',
             'update' => 'user_update',
             'auth' => 'user_auth',
         );
+        if (strpos($options[0], "weibo_login") !== false) {
+            $options[0] = "weibo_login";
+        }
         $this->action = $this->actions[$options[0]];
         $output = $this->{$this->action}();
     }
@@ -41,6 +45,25 @@ class User extends Controller {
             $_SESSION["vaild_user"] = null;
             throw new Exception("用户名或密码错误");
         }
+    }
+
+    protected function weibo_login() {
+        if (!empty($_GET['code']) && isset($_GET['code'])) {
+            $code = $_GET['code'];
+        } else {
+            throw new Exception("你取消了微博登录!");
+        }
+        $data = $this->weibo("https://api.weibo.com/oauth2/access_token?client_id=1949395522&client_secret=461bd6312821defb5aa3393732c94940&grant_type=authorization_code&code=$code&redirect_uri=https://51php.org/bysj/weibo_login", 1);
+        $access_token = json_decode($data, true)['access_token'];
+        $data = $this->weibo("https://api.weibo.com/oauth2/get_token_info?access_token=$access_token", 1);
+        $uid = json_decode($data, true)['uid'];
+        $data = $this->weibo("https://api.weibo.com/2/users/show.json?access_token=$access_token&uid=$uid", 0);
+        $data = json_decode($data, true);
+        $_SESSION["vaild_user"] = true;
+        $_SESSION["user_id"] = $uid;
+        $_SESSION["user_name"] = "Weibo_" . $data['screen_name'];
+        $_SESSION["email"] = "";
+        header("Location:" . APP_URI . 'home/');
     }
 
     protected function user_regform() {
@@ -79,5 +102,18 @@ class User extends Controller {
             $data = array("email", $this->sanitize($_POST['email']));
         }
         echo $this->model->user_auth($data);
+    }
+
+    protected function weibo($url, $is_post) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        if ($is_post == 1) {
+            curl_setopt($ch, CURLOPT_POST, 1);
+        }
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return $data;
     }
 }

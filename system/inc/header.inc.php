@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title><?php echo $title ?></title>
     <!--实时对话-->
-    <link rel="stylesheet" href="<?php echo $css_path ?>"/>
+    <link rel="stylesheet" href="https://jzz15.oss-cn-shenzhen.aliyuncs.com/bysj/assets/styles/main.css"/>
 </head>
 
 <body>
