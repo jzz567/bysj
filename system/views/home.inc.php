@@ -14,9 +14,6 @@
         <label>你希望的名字是?
             <input type="text" name="presenter-name"/>
         </label>
-        <label>你的邮箱是?
-            <input type="text" name="presenter-email"/>
-        </label>
         <label>你的房间名叫?
             <input type="text" name="session-name"/>
         </label>
