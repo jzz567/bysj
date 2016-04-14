@@ -9,8 +9,16 @@
 
 <body>
 <div style="background:#1f1b0c;font-size: small;text-align: right;">
-    <a style="text-decoration: none" href="<?php echo APP_URI . 'home' ?>">返回主页</a>
-    <a style="text-decoration: none" href="<?php echo APP_URI . 'user/logout' ?>">注销</a>
+    <?php
+    if (!empty($_SESSION['user_id']) && isset($_SESSION['user_id'])) {
+        $home = APP_URI . 'home';
+        $logout = APP_URI . 'user/logout';
+        $username = $_SESSION['user_name'];
+        echo '<a style="text-decoration: none" href="#">欢迎您,' . $username . ' </a>';
+        echo '<a style="text-decoration: none" href="' . $home . '">返回主页  </a>';
+        echo '<a style="text-decoration: none" href="' . $logout . '">注销</a>';
+    }
+    ?>
 </div>
 <header>
     <p>

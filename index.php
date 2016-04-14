@@ -118,10 +118,6 @@ function remove_unwanted_slashes($dirty_path) {
  * 自动在可能的目录搜索类名并载入
  * */
 function class_autoloader($class_name) {
-    if ($class_name == "Jzz\Error") {
-        require_once(SYS_PATH . "/controllers/class.jerror.inc.php");
-        return true;
-    }
     $fname = strtolower($class_name);
     $possible_locations = array(
         SYS_PATH . "/models/class.$fname.inc.php",

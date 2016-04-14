@@ -1,6 +1,3 @@
-<br/>
-<br/>
-<br/>
 <form id="ask-a-question" method="post"
       action="<?php echo $form_action; ?>">
     <label>

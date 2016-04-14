@@ -4,7 +4,7 @@
             &copy;2016 Jzz
         </li>
         <li>
-            <a href="https://51php.org">我的博客</a>
+            <a href="http://blog.51php.org">我的博客</a>
         </li>
     </ul>
 </footer>
