@@ -16,6 +16,7 @@ class Room extends Controller {
             'open' => 'open_room',
             'close' => 'close_room',
             'msg' => 'send_msg',
+            'no-room' => 'no-room',
         );
         if ($options[0] === 'msg') {
             $this->send_msg();
@@ -106,7 +107,7 @@ class Room extends Controller {
         if ($this->model->room_exists($room_id)) {
             $header = APP_URI . 'room/' . $room_id;
         } else {
-            $header = APP_URI . 'no-room';
+            throw new Exception("房间不存在");
         }
         header("Location: " . $header);
         exit;
